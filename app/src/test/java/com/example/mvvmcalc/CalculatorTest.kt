@@ -1,5 +1,6 @@
 package com.example.mvvmcalc
 
+import com.example.mvvmcalc.utils.Calculator
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -8,9 +9,16 @@ import org.junit.Test
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
+
 class CalculatorTest {
   @Test
   fun addTest() {
-    assertEquals(4, 2 + 2)
+    // given
+    val calculator = Calculator()
+
+    // when
+    val result = calculator.calculation("1+2")
+
+    assertEquals("3", result)
   }
 }

@@ -13,6 +13,7 @@
       xmlns:tools="http://schemas.android.com/tools"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:keepScreenOn="true"
       tools:context=".view.MainActivity">
 
     <EditText
@@ -49,102 +50,119 @@
         app:layout_constraintVertical_bias="0">
 
       <Button
+          android:id="@+id/btnNum1"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick="@{()->viewModel.clickNumber(1)}"
           android:text="1" />
 
       <Button
+          android:id="@+id/btnNum2"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick="@{()->viewModel.clickNumber(2)}"
           android:text="2" />
 
       <Button
+          android:id="@+id/btnNum3"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick="@{()->viewModel.clickNumber(3)}"
           android:text="3" />
 
       <Button
+          android:id="@+id/btnAdd"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick='@{()->viewModel.clickOperator("+")}'
           android:text="+" />
 
       <Button
+          android:id="@+id/btnNum4"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick="@{()->viewModel.clickNumber(4)}"
           android:text="4" />
 
       <Button
+          android:id="@+id/btnNum5"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick="@{()->viewModel.clickNumber(5)}"
           android:text="5" />
 
       <Button
+          android:id="@+id/btnNum6"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick="@{()->viewModel.clickNumber(6)}"
           android:text="6" />
 
       <Button
+          android:id="@+id/btnSub"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick='@{()->viewModel.clickOperator("-")}'
           android:text="-" />
 
       <Button
+          android:id="@+id/btnNum7"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick="@{()->viewModel.clickNumber(7)}"
           android:text="7" />
 
       <Button
+          android:id="@+id/btnNum8"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick="@{()->viewModel.clickNumber(8)}"
           android:text="8" />
 
       <Button
+          android:id="@+id/btnNum9"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick="@{()->viewModel.clickNumber(9)}"
           android:text="9" />
 
       <Button
+          android:id="@+id/btnMul"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick='@{()->viewModel.clickOperator("*")}'
           android:text="*" />
 
       <Button
+          android:id="@+id/btnNum0"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick="@{()->viewModel.clickNumber(0)}"
           android:text="0" />
 
       <Button
+          android:id="@+id/btnDelete"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick="@{()->viewModel.remove()}"
           android:text="지우기" />
 
       <Button
+          android:id="@+id/btnClear"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick="@{()->viewModel.clear()}"
           android:text="C" />
 
       <Button
+          android:id="@+id/btnDiv"
           android:layout_width="wrap_content"
           android:layout_height="60dp"
           android:onClick='@{()->viewModel.clickOperator("/")}'
           android:text="/" />
 
       <Button
+          android:id="@+id/btnEquals"
           android:layout_width="match_parent"
           android:layout_height="60dp"
           android:layout_columnSpan="4"

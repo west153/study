@@ -1,5 +1,6 @@
 package com.example.toy.mvvm.github.view
 
+import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableList
@@ -11,7 +12,13 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
   private val compositeDisposable = CompositeDisposable()
 
   val input = ObservableField<String>()
-  private val userList: ObservableList<String> = ObservableArrayList()
+  val userList: ObservableList<String> = ObservableArrayList()
+
+  override fun onCleared() {
+    Log.i("MainViewModel", "onCleared")
+    super.onCleared()
+    compositeDisposable.clear()
+  }
 
   fun searchUser() {
     userList.clear()

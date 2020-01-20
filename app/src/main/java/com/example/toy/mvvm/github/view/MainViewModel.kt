@@ -1,17 +1,23 @@
 package com.example.toy.mvvm.github.view
 
-import android.util.Log
-import androidx.databinding.BaseObservable
+import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableField
+import androidx.databinding.ObservableList
+import androidx.lifecycle.ViewModel
 import com.example.toy.mvvm.github.data.source.Repository
 import io.reactivex.disposables.CompositeDisposable
 
-class MainViewModel(private val repository: Repository) : BaseObservable() {
+class MainViewModel(private val repository: Repository) : ViewModel() {
   private val compositeDisposable = CompositeDisposable()
 
-  var input = ObservableField<String>()
+  val input = ObservableField<String>()
+  private val userList: ObservableList<String> = ObservableArrayList()
 
   fun searchUser() {
-    Log.d("input", "${input.get()}")
+    userList.clear()
+    userList.add("User: ${input.get()} 0")
+    userList.add("User: ${input.get()} 1")
+    userList.add("User: ${input.get()} 2")
+    userList.add("User: ${input.get()} 3")
   }
 }

@@ -8,9 +8,8 @@ import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface GithubApiService {
   @GET(searchUser)
-  fun searchUser(@Header("$authorization") authorization: String = token, @Path() user: String): Flowable<User>
+  fun searchUser(@Header(authorization) value: String = token, @Path("user") user: String): Flowable<User>
 }

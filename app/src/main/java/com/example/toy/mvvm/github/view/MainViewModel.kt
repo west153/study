@@ -6,13 +6,15 @@ import androidx.databinding.ObservableField
 import androidx.databinding.ObservableList
 import androidx.lifecycle.ViewModel
 import com.example.toy.mvvm.github.data.source.Repository
+import com.example.toy.mvvm.github.entity.User
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 
 class MainViewModel(private val repository: Repository) : ViewModel() {
   private val compositeDisposable = CompositeDisposable()
 
   val input = ObservableField<String>()
-  val userList: ObservableList<String> = ObservableArrayList()
+  val userList: ObservableList<User> = ObservableArrayList()
 
   override fun onCleared() {
     Log.i("MainViewModel", "onCleared")
@@ -21,10 +23,21 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
   }
 
   fun searchUser() {
-    userList.clear()
-    userList.add("User: ${input.get()} 0")
-    userList.add("User: ${input.get()} 1")
-    userList.add("User: ${input.get()} 2")
-    userList.add("User: ${input.get()} 3")
+    if (input.get() == null || input.get()?.isEmpty() == true) {
+      userList.clear()
+      return
+    }
+    repository.searchUser(input.get()!!)
+      .subscribe(this::addUser, this::onError)
+      .addTo(compositeDisposable)
   }
+
+  private fun addUser(user: User) {
+    userList.add(user)
+  }
+
+  private fun onError(e: Throwable) {
+    e.printStackTrace()
+  }
+
 }

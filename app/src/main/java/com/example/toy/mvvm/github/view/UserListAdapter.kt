@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toy.mvvm.github.R
+import com.example.toy.mvvm.github.entity.User
 
 class UserListAdapter(private val viewModel: MainViewModel) :
   RecyclerView.Adapter<UserViewHolder>() {
 
-  private val userList = arrayListOf<String>()
+  private val userList = arrayListOf<User>()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder =
     LayoutInflater.from(parent.context)
@@ -22,7 +23,7 @@ class UserListAdapter(private val viewModel: MainViewModel) :
     holder.bind(viewModel, userList[position])
   }
 
-  fun initList(item: List<String>) {
+  fun initList(item: List<User>) {
     userList.clear()
     userList.addAll(item)
     notifyDataSetChanged()

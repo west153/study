@@ -13,12 +13,18 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
 
   val input = MutableLiveData<String>()
 
-  private val _userList = MutableLiveData<List<User>>()
-  val userList: LiveData<List<User>> get() = _userList
+  private val _userList = MutableLiveData<List<User>?>().apply { initList() }
+  val userList: LiveData<List<User>?> get() = _userList
 
   override fun onCleared() {
     super.onCleared()
     compositeDisposable.clear()
+  }
+
+  private fun initList() {
+    Thread {
+      _userList.postValue(repository.getBookmarkList())
+    }.start()
   }
 
   fun searchUser() {
@@ -31,12 +37,34 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
       .addTo(compositeDisposable)
   }
 
+  fun bookmark(user: User) {
+    val disposable = if (user.isBookmark == true) {
+      repository.removeBookmark(user)
+    } else {
+      repository.addBookmark(user.copy(isBookmark = true))
+    }
+
+    disposable
+      .subscribe({ replaceList(user) }, this::onError)
+      .addTo(compositeDisposable)
+  }
+
+  private fun replaceList(user: User) {
+    _userList.value = _userList.value?.toMutableList()?.apply {
+      val index = this.indexOfFirst { it.login == user.login }
+      this[index] = user.copy(isBookmark = user.isBookmark != true)
+    }
+  }
+
   private fun addUser(user: User) {
-    _userList.value = _userList.value?.toMutableList()?.apply { this.add(user) }
+    _userList.value = if (_userList.value == null) {
+      arrayListOf(user)
+    } else {
+      _userList.value?.toMutableList()?.apply { this.add(user) }
+    }
   }
 
   private fun onError(e: Throwable) {
     e.printStackTrace()
   }
-
 }

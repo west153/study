@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.example.toy.mvvm.github.livedata"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+        enabledForTests = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //app
+    implementation "androidx.appcompat:appcompat:$v_appCompat"
+    implementation "androidx.recyclerview:recyclerview:$v_recyclerView"
+    implementation "androidx.constraintlayout:constraintlayout:$v_constraintlayout"
+    implementation "androidx.annotation:annotation:$v_androidXAnnotations"
+    implementation "androidx.legacy:legacy-support-v4:$v_support_v4"
+    implementation "androidx.test.espresso:espresso-idling-resource:$v_espresso"
+
+    //kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.fragment:fragment-ktx:$v_fragmentKtx"
+    implementation "androidx.core:core-ktx:$v_coreKtx"
+
+    //rx
+    implementation "io.reactivex.rxjava2:rxkotlin:$v_rx2_rxkotlin"
+    implementation "io.reactivex.rxjava2:rxandroid:$v_rx2_rxAndroid"
+    implementation "io.reactivex.rxjava2:rxjava:$v_rx2_rxjava"
+
+    //aac
+    implementation "androidx.room:room-runtime:$v_room"
+    kapt "androidx.room:room-compiler:$v_room"
+    implementation "androidx.room:room-ktx:$v_room"
+    implementation "androidx.room:room-rxjava2:$v_room"
+    implementation "androidx.lifecycle:lifecycle-extensions:$v_archLifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$v_archLifecycle"
+
+    //network
+    implementation "com.squareup.retrofit2:retrofit:$v_retrofit2"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$v_retrofit2_adapterRxjav2"
+    implementation "com.squareup.retrofit2:converter-gson:$v_retrofit2_convertGson"
+    implementation "com.squareup.okhttp3:okhttp:$v_okhttp3"
+    implementation "com.squareup.okhttp3:logging-interceptor:$v_okhttp3_loggingInterceptor"
+    implementation "com.google.code.gson:gson:$v_gson"
+
+    // di
+    implementation "com.google.dagger:dagger:$v_dagger2"
+    implementation "com.google.dagger:dagger-android-support:$v_dagger2"
+    kapt "com.google.dagger:dagger-compiler:$v_dagger2"
+    kapt "com.google.dagger:dagger-android-processor:$v_dagger2"
+
+//    api 'com.google.dagger:dagger-android:2.26'
+//    api 'com.google.dagger:dagger-android-support:2.26' // if you use the support libraries
+//    annotationProcessor 'com.google.dagger:dagger-android-processor:2.26'
+}
